@@ -20,6 +20,10 @@ public class MathController {
     @GetMapping("/add/{num1}/and/{num2}")
     @ResponseBody
     public String add(@PathVariable long num1, @PathVariable long num2) {
+        //if you didn't want to have a string response (any text)
+        //change the data type of the method to match the data type
+        //of the params (so here, change String to long and just return
+        //the long params (num1 + num2)
         return "show addition results: " + (num1 + num2);
     }
 
@@ -37,8 +41,8 @@ public class MathController {
 
     @GetMapping("/divide/{num1}/by/{num2}")
     @ResponseBody
-    public String divide(@PathVariable long num1, @PathVariable long num2) {
-        return "show division results: " + (num1 / num2);
+    public double divide(@PathVariable double num1, @PathVariable double num2) {
+        return num1 / num2;
     }
 
 

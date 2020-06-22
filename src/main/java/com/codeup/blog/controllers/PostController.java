@@ -11,6 +11,10 @@ public class PostController {
 
     //method GET
     @GetMapping("/posts")
+    //could use @RequestMapping instead of @GetMapping^, but it's much longer so...
+    //the latest version of Spring has eliminated the need for this alternative
+    //even though there are shorter alternatives now (GetMapping)
+    //@RequestMapping(value = "/posts", method = RequestMethod.GET)
     @ResponseBody
     public String getIndex() {
         return "Here's the index page of posts.";
@@ -19,7 +23,7 @@ public class PostController {
     //method GET
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String getPost(@PathVariable int id) {
+    public String getPost(@PathVariable long id) {
         return "Here's the individual post you searched for: " + id;
     }
 

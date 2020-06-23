@@ -6,7 +6,8 @@
     <title>Home</title>
 </head>
 <body>
-    <nav th:include="fragments/navbar :: navbar"/>
+    <nav th:replace="fragments/navbar :: navbar"/>
+
     <h1>Welcome to our home page! <span th:text="${name}"></span></h1>
 </body>
 </html>

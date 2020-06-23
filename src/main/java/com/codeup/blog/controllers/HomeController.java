@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("/")
-    @ResponseBody
+//    @ResponseBody
+    //had to get rid of @Response body in order to make it return the home.html page
+    //vs. just returning as text
     public String home(){
-        return "This is the landing page!";
+        return "home";
     }
 
     @GetMapping("/{name}")

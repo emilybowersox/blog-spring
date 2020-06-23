@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--including this head includes the bootstrap-->
+<head th:include="fragments/head :: head('Welcome Page')">
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
+    <nav th:include="fragments/navbar :: navbar"/>
     <h1>Welcome to our home page! <span th:text="${name}"></span></h1>
 </body>
 </html>

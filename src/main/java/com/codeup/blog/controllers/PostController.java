@@ -15,16 +15,14 @@ public class PostController {
     //the latest version of Spring has eliminated the need for this alternative
     //even though there are shorter alternatives now (GetMapping)
     //@RequestMapping(value = "/posts", method = RequestMethod.GET)
-    @ResponseBody
-    public String getIndex() {
-        return "Here's the index page of posts.";
+    public String index() {
+        return "posts/index";
     }
 
     //method GET
     @GetMapping("/posts/{id}")
-    @ResponseBody
     public String getPost(@PathVariable long id) {
-        return "Here's the individual post you searched for: " + id;
+        return "posts/show";
     }
 
     //method GET
@@ -43,5 +41,8 @@ public class PostController {
         return "Create a new post!";
     }
 
+//    Inside the method that shows an individual post, create a new post object and pass it to the view.
+//    Inside the method that shows all the posts, create a new array list and add two post objects to it,
+//    then pass that list to the view.
 
 }

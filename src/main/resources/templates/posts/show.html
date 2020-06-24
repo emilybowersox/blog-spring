@@ -5,7 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"/>
-
+    <nav th:replace="fragments/navbar :: navbar"/>
+    <div class="container">
+        <div th:if="${post == null}">Post not found.</div>
+        <div th:if="${post}">
+            <div th:text="${post.id}">ID</div>
+            <h3 th:text="${post.title}">Title</h3>
+            <div th:text="${post.body}">Content</div>
+        </div>
+    </div>
 </body>
 </html>

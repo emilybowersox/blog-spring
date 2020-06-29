@@ -19,6 +19,7 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
+
 // empty constructor for the Spring framework to use (not for developers- for Spring)
     public Post(){}
 

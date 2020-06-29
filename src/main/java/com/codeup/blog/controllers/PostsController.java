@@ -27,6 +27,12 @@ public class PostsController {
 //    including methods for retrieving an Iterable Interface1 with all the ads (findAll),
 //    a specific ad (getOne), inserting or updating an ad (save), and deleting an ad (delete).
 
+    @GetMapping("/hello")
+    @ResponseBody
+    public String hello(){
+        return "hello it's working";
+    }
+
 
     //the post/get-mapping is the url
     @PostMapping("/posts/{id}/edit")

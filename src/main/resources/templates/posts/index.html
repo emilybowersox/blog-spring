@@ -5,12 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <nav th:replace="fragments/navbar :: navbar"/>
+<!--the problem was is that the navbar was missing it's value for the title in ${title}}-->
+    <nav th:replace="fragments/navbar :: navbar('Posts')"/>
     <div class="container">
-        <div th:if="${noPostsFound}">
-            No posts were found.
-        </div>
+<!--        <div th:if="${noPostsFound}">-->
+<!--            No posts were found.-->
+<!--        </div>-->
         <div th:each="post : ${posts}">
+            <div th:text="${post.id}">ID</div>
             <h3 th:text="${post.title}">Title</h3>
             <div th:text="${post.body}">Content</div>
         </div>

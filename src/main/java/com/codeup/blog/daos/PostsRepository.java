@@ -9,16 +9,13 @@ import java.util.List;
 
 public interface PostsRepository extends JpaRepository<Post, Long> {
 
-    @Query ("from Post as a where p.title like %:term% or p.body like %:term%")
+    @Query ("from Post as p where p.title like %:term% or p.body like %:term%")
     List<Post> searchByTitle(@Param("term") String term);
 
 //    // query methods
 //    Post findFirstByTitle(String title); // select * from posts where title = ? limit 1
 
 
-//    Post save();
-//
-//    Post delete();
 }
 
 

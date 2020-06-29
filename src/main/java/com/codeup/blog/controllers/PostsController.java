@@ -13,6 +13,7 @@ public class PostsController {
     // where we create a Repository instance and initialize it in the controller class constructor.
     private final PostsRepository postsDao;
     public PostsController(PostsRepository postsDao) {
+
         this.postsDao = postsDao;
     }
 
@@ -52,9 +53,10 @@ public class PostsController {
     }
 
     @PostMapping("/posts/{id}/delete")
-    public String delete(Model model, @PathVariable long id) {
-        model.addAttribute("posts", postsDao.delete());
-        return "posts/index";
+    @ResponseBody
+    public String delete(@PathVariable long id) {
+        postsDao.deleteById(id);
+        return "ad was deleted";
     }
 
 

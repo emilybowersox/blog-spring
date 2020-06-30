@@ -14,8 +14,13 @@ public class EmailService {
 //    @Autowired
     public JavaMailSender emailSender;
 
+//    public EmailService(JavaMailSender emailSender) {
+//        this.emailSender = emailSender;
+//    }
+
     @Value("${spring.mail.from}")
     private String from;
+
 
     public void prepareAndSend(Post post, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -34,4 +39,6 @@ public class EmailService {
     }
 
 
+//    public void prepareAndSend(long id) {
+//    }
 }

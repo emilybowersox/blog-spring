@@ -14,19 +14,13 @@ public class PostsController {
 
     // These two next steps are often called dependency injection,
     // where we create a Repository instance and initialize it in the controller class constructor.
-    private PostsRepository postsDao;
-    private UsersRepository usersDao;
-    private EmailService emailService;
+    private final PostsRepository postsDao;
+    private final UsersRepository usersDao;
+    private final EmailService emailService;
 
     public PostsController(PostsRepository postsDao, UsersRepository usersDao, EmailService emailService) {
         this.postsDao = postsDao;
         this.usersDao = usersDao;
-        this.emailService = emailService;
-    }
-
-
-
-    public PostsController(EmailService emailService) {
         this.emailService = emailService;
     }
 
@@ -133,16 +127,9 @@ public class PostsController {
         User postCreator = usersDao.getOne(1L);
         newPost.setCreator(postCreator);
         Post savedPost = postsDao.save(newPost);
+        emailService.prepareAndSend(savedPost, "Your ad has been created", "Your ad has been created with the id of: " + savedPost.getId());
         return "redirect:/posts/" + savedPost.getId();
     }
-
-//    Inside the method that shows an individual post, create a new post object and pass it to the view.
-//    Inside the method that shows all the posts, create a new array list and add two post objects to it,
-//    then pass that list to the view.
-
-
-
-
 
 
 

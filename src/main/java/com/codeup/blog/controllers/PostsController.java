@@ -1,6 +1,7 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.daos.PostsRepository;
+import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,11 @@ public class PostsController {
     // These two next steps are often called dependency injection,
     // where we create a Repository instance and initialize it in the controller class constructor.
     private final PostsRepository postsDao;
-    public PostsController(PostsRepository postsDao) {
+    private UsersRepository usersDao;
 
+    public PostsController(PostsRepository postsDao, UsersRepository usersDao) {
         this.postsDao = postsDao;
+        this.usersDao = usersDao;
     }
 
 
@@ -23,14 +26,16 @@ public class PostsController {
         model.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }
+
 //    By extending JpaRepository, we inherit the CRUD functionality that the Spring framework provides,
 //    including methods for retrieving an Iterable Interface1 with all the ads (findAll),
 //    a specific ad (getOne), inserting or updating an ad (save), and deleting an ad (delete).
 
-    @GetMapping("/hello")
+    @GetMapping("/users")
     @ResponseBody
-    public String hello(){
-        return "hello it's working";
+    public String users(Model model){
+        model.addAttribute("users", usersDao.findAll());
+        return "grabbing all the users";
     }
 
 
@@ -103,9 +108,9 @@ public class PostsController {
 
     //method GET
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String viewPostForm() {
-        return "Here's the form to create a new post.";
+    public String viewCreateForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     //method POST

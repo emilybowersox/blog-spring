@@ -4,6 +4,7 @@ import com.codeup.blog.daos.PostsRepository;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
+import com.codeup.blog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +14,20 @@ public class PostsController {
 
     // These two next steps are often called dependency injection,
     // where we create a Repository instance and initialize it in the controller class constructor.
-    private final PostsRepository postsDao;
+    private PostsRepository postsDao;
     private UsersRepository usersDao;
+    private EmailService emailService;
 
-    public PostsController(PostsRepository postsDao, UsersRepository usersDao) {
+    public PostsController(PostsRepository postsDao, UsersRepository usersDao, EmailService emailService) {
         this.postsDao = postsDao;
         this.usersDao = usersDao;
+        this.emailService = emailService;
+    }
+
+
+
+    public PostsController(EmailService emailService) {
+        this.emailService = emailService;
     }
 
 

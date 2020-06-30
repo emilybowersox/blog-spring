@@ -3,6 +3,7 @@ package com.codeup.blog.controllers;
 import com.codeup.blog.daos.PostsRepository;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
+import com.codeup.blog.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,10 +95,12 @@ public class PostsController {
 
     //method GET
     @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable long id, Model myModel) {
-        myModel.addAttribute("id", id);
+    public String getPost(@PathVariable long id, Model model) {
+        Post post = postsDao.getOne(id);
+        model.addAttribute("id", id);
+        model.addAttribute("post", post);
             // want that id to be generated- not something i type in
-        myModel.addAttribute("post", new Post( "1st Post", "this is my first post."));
+//        myModel.addAttribute("post", new Post( "1st Post", "this is my first post."));
         return "posts/show";
     }
     //Instructions: Inside the method that shows an individual post,
@@ -117,9 +120,11 @@ public class PostsController {
     //can't have two methods mapped to the same url??
     //this was supposed to be @PostMapping not @GetMapping
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "Create a new post!";
+    public String saveNewPost(@ModelAttribute Post newPost) {
+        User postCreator = usersDao.getOne(1L);
+        newPost.setCreator(postCreator);
+        Post savedPost = postsDao.save(newPost);
+        return "redirect:/posts/" + savedPost.getId();
     }
 
 //    Inside the method that shows an individual post, create a new post object and pass it to the view.

@@ -106,10 +106,6 @@ public class PostsController {
 //        myModel.addAttribute("post", new Post( "1st Post", "this is my first post."));
         return "posts/show";
     }
-    //Instructions: Inside the method that shows an individual post,
-    // create a new post object and pass it to the view.
-
-
 
 
     //method GET
@@ -120,8 +116,6 @@ public class PostsController {
     }
 
     //method POST
-    //can't have two methods mapped to the same url??
-    //this was supposed to be @PostMapping not @GetMapping
     @PostMapping("/posts/create")
     public String saveNewPost(@ModelAttribute Post newPost) {
         User postCreator = usersDao.getOne(1L);

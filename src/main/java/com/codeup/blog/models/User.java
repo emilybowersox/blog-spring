@@ -10,11 +10,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String username;
 
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String email;
 
     @Column(nullable = false, length = 255)
@@ -23,6 +23,17 @@ public class User {
 
 // empty constructor for the Spring framework to use (not for developers- for Spring)
     public User(){}
+
+    //The constructor User(User copy) defined in this class is a common pattern in Java called a copy constructor.
+    // It is used as an alternative to cloning an object.
+    // Instead of using the method clone, we create a new object using the current values of another.
+    // This will be used in order to fulfill the contract defined by the interfaces in the security package.
+    public User(User copy){
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
 
     //constructor for "read"
     public User(long id, String username, String email, String password) {

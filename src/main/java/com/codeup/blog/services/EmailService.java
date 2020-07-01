@@ -14,6 +14,8 @@ public class EmailService {
     @Autowired
     public JavaMailSender emailSender;
 
+    //so you either use the @Autowired annotation OR you use the constructor below- just one or the either
+    //if the email sending service is taking to long- try changing the port number
 //    public EmailService(JavaMailSender emailSender) {
 //        this.emailSender = emailSender;
 //    }

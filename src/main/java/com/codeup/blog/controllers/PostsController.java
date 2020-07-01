@@ -27,6 +27,7 @@ public class PostsController {
 
     @GetMapping("/posts")
     public String index(Model model) {
+        //   model.addAttribute("noAdsFound", adsList.size() == 0);
         model.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }

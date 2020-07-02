@@ -33,7 +33,13 @@ public class UserController {
         return "redirect:/login";
     }
 
-
+    @GetMapping("/landing")
+    public String userLanding() {
+//        public String index(Model model) {
+        //   model.addAttribute("noAdsFound", adsList.size() == 0);
+//        model.addAttribute("posts", postsDao.findAll());
+        return "/users/landing";
+    }
 
 
 }

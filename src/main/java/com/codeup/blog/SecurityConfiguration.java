@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/posts") // user's home page, it can be any URL
+                .defaultSuccessUrl("/landing") // user's home page, it can be any URL (now sends to the @GetMapping("/landing") in the UserController)
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
                 .and()

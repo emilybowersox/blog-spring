@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AuthenticationController {
 
+    //the url
     @GetMapping("/login")
     public String showLoginForm() {
+        //the view it's returning
         return "users/login";
     }
 

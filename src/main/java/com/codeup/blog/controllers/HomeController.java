@@ -22,11 +22,12 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/{name}")
-    public String homepage(@PathVariable String name, Model model) {
-        model.addAttribute("name", name);
-        return "home";
-    }
+
+//    @GetMapping("/{name}")
+//    public String homepage(@PathVariable String name, Model model) {
+//        model.addAttribute("name", name);
+//        return "home";
+//    }
 
 
 }

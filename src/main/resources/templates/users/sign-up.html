@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar('Sign Up')"/>
+<nav th:replace="fragments/navbar :: navbar"/>
 <div class="container">
     <h1>Create an account</h1>
     <form th:action="@{/sign-up}" method="post" th:object="${user}">

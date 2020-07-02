@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/head :: head('Options')">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar"/>
 <div class="container">
 <h1>Welcome "user"</h1>
 <!--    //<span th:text="${name}"></span>-->

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>My Blog</title>
@@ -15,10 +16,7 @@
 <!--        why is this behaving like an ordered list/with bullet points?...-->
 <!--        part of the problem was using an old version (3) of bootstrap-->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
+            <li class="nav-item active ">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item dropdown">
@@ -32,6 +30,19 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
+<!--            THIS BELOW IS HOW YOU DO THE LOGIN/LOGOUT ADDING SPRING SECURITY- THIS SHOULD REPLACE
+              WHAT I HAVE BELOW-->
+<!--            <li class="nav-item" sec:authorize="!isAuthenticated()">-->
+<!--                <a class="nav-link" href="/login">Login</a>-->
+<!--            </li>-->
+<!--            <li sec:authorize="isAuthenticated()">-->
+<!--                <span th:text="${#authentication.principal.username}"/>-->
+<!--            </li>-->
+<!--            <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                <form th:action="@{/logout}" th:method="post">-->
+<!--                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>-->
+<!--                </form>-->
+<!--            </li>-->
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -39,6 +50,9 @@
         </form>
         <form th:action="@{/sign-up}" th:method="get">
             <button class="btn-link btn" style="margin-top: 8px">Register</button>
+        </form>
+        <form th:action="@{/login}" th:method="get">
+            <button class="btn-link btn" style="margin-top: 8px">Login</button>
         </form>
         <form th:action="@{/logout}" th:method="post">
             <button class="btn-link btn" style="margin-top: 8px">Logout</button>

@@ -5,6 +5,7 @@ import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
 import com.codeup.blog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -119,14 +120,15 @@ public class PostsController {
     //method POST
     @PostMapping("/posts/create")
     public String saveNewPost(@ModelAttribute Post newPost) {
-        User postCreator = usersDao.getOne(1L);
+        User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newPost.setCreator(postCreator);
         Post savedPost = postsDao.save(newPost);
         emailService.prepareAndSend(savedPost, "Your ad has been created", "Your ad has been created with the id of: " + savedPost.getId());
         return "redirect:/posts/" + savedPost.getId();
     }
 
-
+    //(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+    // ^this is how you access the logged in user from the Controller fyi
 
 
 }

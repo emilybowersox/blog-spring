@@ -7,7 +7,7 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
     <div class="container">
-
+    <h4>Create a new post!</h4>
 <!--        using "form model binding"-->
         <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
 <!--don't have to put: type="text" name=" "-->

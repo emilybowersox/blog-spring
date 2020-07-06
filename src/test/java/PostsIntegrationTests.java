@@ -113,7 +113,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     public void testAdsIndex() throws Exception {
-        Post existingAd = postDao.findAll().get(0);
+        Post existingPost = postDao.findAll().get(0);
 
         // Makes a Get request to /ads and verifies that we get some of the static text of the ads/index.html template and at least the title from the first Ad is present in the template.
         this.mvc.perform(get("/posts"))
@@ -121,11 +121,30 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 // Test the static content of the page
                 .andExpect(content().string(containsString("Latest posts")))
                 // Test the dynamic content of the page
-                .andExpect(content().string(containsString(existingAd.getTitle())));
+                .andExpect(content().string(containsString(existingPost.getTitle())));
     }
 
+    //UPDATE
+    @Test
+    public void testEditPost() throws Exception {
+        // Gets the first Post for tests purposes
+        Post existingPost = postDao.findAll().get(0);
 
+        // Makes a Post request to /ads/{id}/edit and expect a redirection to the Ad show page
+        this.mvc.perform(
+                post("/posts/" + existingPost.getId() + "/edit").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("title", "edited title")
+                        .param("body", "edited description"))
+                .andExpect(status().is3xxRedirection());
 
+        // Makes a GET request to /ads/{id} and expect a redirection to the Ad show page
+        this.mvc.perform(get("/posts/" + existingPost.getId()))
+                .andExpect(status().isOk())
+                // Test the dynamic content of the page
+                .andExpect(content().string(containsString("edited title")))
+                .andExpect(content().string(containsString("edited description")));
+    }
 
 
 }

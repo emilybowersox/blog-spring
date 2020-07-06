@@ -11,6 +11,7 @@
 <!--        <div th:if="${noPostsFound}">-->
 <!--            No posts were found.-->
 <!--        </div>-->
+        <h3>Latest posts</h3>
         <div th:each="post : ${posts}">
             <div th:text="${post.id}">ID</div>
             <h3 th:text="${post.title}">Title</h3>

@@ -1,6 +1,7 @@
 import com.codeup.blog.BlogApplication;
 import com.codeup.blog.daos.PostsRepository;
 import com.codeup.blog.daos.UsersRepository;
+import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
     @SpringBootTest(classes = BlogApplication.class)
@@ -76,13 +78,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         assertNotNull(mvc);
     }
 
-
     @Test
     public void testIfUserSessionIsActive() throws Exception {
         // It makes sure the returned session is not null
         assertNotNull(httpSession);
     }
 
+    //sanity tests for CRUD functionality (create, read, update, delete)
+    //CREATE
     @Test
     public void testCreatePost() throws Exception {
         // Makes a Post request to /ads/create and expect a redirection to the Ad
@@ -94,6 +97,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                         .param("body", "best buy sale"))
                 .andExpect(status().is3xxRedirection());
     }
+
+    //READ
+    @Test
+    public void testShowAd() throws Exception {
+
+        Post existingPost = postDao.findAll().get(0);
+
+        // Makes a Get request to /ads/{id} and expect a redirection to the Ad show page
+        this.mvc.perform(get("/posts/" + existingPost.getId()))
+                .andExpect(status().isOk())
+                // Test the dynamic content of the page
+                .andExpect(content().string(containsString(existingPost.getBody())));
+    }
+
+    @Test
+    public void testAdsIndex() throws Exception {
+        Post existingAd = postDao.findAll().get(0);
+
+        // Makes a Get request to /ads and verifies that we get some of the static text of the ads/index.html template and at least the title from the first Ad is present in the template.
+        this.mvc.perform(get("/posts"))
+                .andExpect(status().isOk())
+                // Test the static content of the page
+                .andExpect(content().string(containsString("Latest posts")))
+                // Test the dynamic content of the page
+                .andExpect(content().string(containsString(existingAd.getTitle())));
+    }
+
+
+
+
 
 }
 

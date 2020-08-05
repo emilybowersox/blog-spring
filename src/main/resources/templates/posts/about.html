@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title)">
+    <head th:include="fragments/head :: head('About Me ')">
     <meta charset="UTF-8">
-    <title>About Me</title>
+    <title></title>
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar"/>
 
+    <div class="container">
 <h1>Hello?</h1>
 
+
+
+    </div>
 </body>
 </html>

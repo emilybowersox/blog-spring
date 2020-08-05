@@ -3,9 +3,14 @@ package com.codeup.blog.services;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service("usersService")
 public class UserService {
@@ -43,6 +48,16 @@ public class UserService {
         return isLoggedIn() && (profileUser.getId() == loggedInUser().getId());
     }
 
-
+    public void authenticate(User user){
+        //use an empty list for the roles
+        UserDetails userDetails = new UserWithRoles(user, Collections.emptyList());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                userDetails.getPassword(),
+                userDetails.getAuthorities()
+        );
+        SecurityContext context = SecurityContextHolder.getContext();
+        context.setAuthentication(authentication);
+    }
 
 }

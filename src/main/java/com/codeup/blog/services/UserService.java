@@ -30,5 +30,19 @@ public class UserService {
         return usersDao.getOne(sessionUser.getId());
     }
 
+    //user is owner of the post
+    public boolean isPostOwner(User postUser){
+        if(isLoggedIn()){
+            return (postUser.getUsername().equals(loggedInUser().getUsername()));
+        }
+        return false;
+    }
+
+    //user has edit access
+    public boolean canEditProfile(User profileUser){
+        return isLoggedIn() && (profileUser.getId() == loggedInUser().getId());
+    }
+
+
 
 }

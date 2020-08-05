@@ -2,7 +2,6 @@ package com.codeup.blog.services;
 
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.User;
-import com.codeup.blog.models.UserWithRoles;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

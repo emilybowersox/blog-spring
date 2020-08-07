@@ -1,8 +1,10 @@
 package com.codeup.blog.services;
 
+//import com.codeup.blog.daos.UserRolesRepository;
 import com.codeup.blog.daos.UserRolesRepository;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.User;
+import com.codeup.blog.models.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,7 +32,7 @@ public class UserDetailsLoader implements UserDetailsService {
         }
 
         List<String> userRoles = roles.ofUserWith(username);
-        return new UserWithRoles(user, userRoles);
+        return new UserRolesService(user, userRoles);
     }
 
 

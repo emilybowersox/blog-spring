@@ -50,7 +50,7 @@ public class UserService {
 
     public void authenticate(User user){
         //use an empty list for the roles
-        UserDetails userDetails = new UserWithRoles(user, Collections.emptyList());
+        UserDetails userDetails = new UserRolesService(user, Collections.emptyList());
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 userDetails.getPassword(),

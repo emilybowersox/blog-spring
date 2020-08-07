@@ -1,6 +1,6 @@
 package com.codeup.blog;
 
-import com.codeup.blog.services.UserDetailsLoader;
+import com.codeup.blog.services.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,9 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //The hashing algorithm we'll use to store passwords
 
 
-    private UserDetailsLoader usersLoader;
+    private MyUserDetailsService usersLoader;
 
-    public SecurityConfiguration(UserDetailsLoader usersLoader) {
+    public SecurityConfiguration(MyUserDetailsService usersLoader) {
         this.usersLoader = usersLoader;
     }
 

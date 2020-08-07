@@ -1,6 +1,6 @@
 package com.codeup.blog.services;
 
-import com.codeup.blog.daos.UserRoles;
+import com.codeup.blog.daos.UserRolesRepository;
 import com.codeup.blog.daos.UsersRepository;
 import com.codeup.blog.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import java.util.List;
 @Service("userDetailsService")
 public class UserDetailsLoader implements UserDetailsService {
     private final UsersRepository users;
-    private final UserRoles roles;
+    private final UserRolesRepository roles;
 
     @Autowired
-    public UserDetailsLoader(UsersRepository users, UserRoles roles) {
+    public UserDetailsLoader(UsersRepository users, UserRolesRepository roles) {
         this.users = users;
         this.roles = roles;
     }

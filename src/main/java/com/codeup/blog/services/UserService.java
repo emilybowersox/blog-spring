@@ -48,16 +48,16 @@ public class UserService {
         return isLoggedIn() && (profileUser.getId() == loggedInUser().getId());
     }
 
-    public void authenticate(User user){
-        //use an empty list for the roles
-        UserDetails userDetails = new UserRolesService(user, Collections.emptyList());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                userDetails.getPassword(),
-                userDetails.getAuthorities()
-        );
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(authentication);
-    }
+//    public void authenticate(User user){
+//        //use an empty list for the roles
+//        UserDetails userDetails = new UserRolesService(user, Collections.emptyList());
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(
+//                userDetails,
+//                userDetails.getPassword(),
+//                userDetails.getAuthorities()
+//        );
+//        SecurityContext context = SecurityContextHolder.getContext();
+//        context.setAuthentication(authentication);
+//    }
 
 }
